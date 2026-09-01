@@ -12,7 +12,10 @@ export default function NavBar() {
                     <Link href="/plante">Plantes</Link>
                 </li>
                 <li>
-                    <Link href="/fleur">Fleurs</Link>
+                    <Link href="/fleur/v1">Fleurs (v1)</Link>
+                </li>
+                <li>
+                    <Link href="/fleur/v2">Fleurs (v2)</Link>
                 </li>
             </ul>
         </nav>
