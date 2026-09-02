@@ -17,6 +17,9 @@ export default function NavBar() {
                 <li>
                     <Link href="/fleur/v2">Fleurs (v2)</Link>
                 </li>
+                <li>
+                    <Link href="/fleur/v3">Fleurs (v3)</Link>
+                </li>
             </ul>
         </nav>
     )

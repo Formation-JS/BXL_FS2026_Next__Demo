@@ -25,17 +25,43 @@ const FlowerService = {
         }));
     },
 
+    getAllWithPagination: async (page, nbElem) => {
+        // Attente de 0.05 secondes
+        await delay(50);
+
+        // Définition de l'index de debut (inclus) et l'index de fin (non-inclus)
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+        // -------------------------------------
+        // page:1 & nbElem:3 → start:0 & end:3
+        // page:2 & nbElem:3 → start:3 & end:6
+        // -------------------------------------
+        // page:3 & nbElem:5 → start:10 & end:15
+        // page:4 & nbElem:5 → start:15 & end:20
+        // -------------------------------------
+        const start = (page - 1) * nbElem;
+        const end = page * nbElem;
+
+        // Renvoi la liste avec l'id, le nom et le prix
+        return flowers
+            .slice(start, end)
+            .map((f) => ({
+                id: f.id,
+                name: f.commonName,
+                price: f.pricePerStem
+            }));
+    },
+
     getAveragePrice: async () => {
         // Attente de 10 secondes
         await delay(10_000);
 
         // Calculer la moyenne
-        if(flowers.length === 0) {
+        if (flowers.length === 0) {
             return -0;
         }
 
         let total = 0;
-        for(const elem of flowers) {
+        for (const elem of flowers) {
             total += elem.pricePerStem;
         }
         return total / flowers.length;
@@ -54,10 +80,10 @@ const FlowerService = {
         await delay(2_500);
 
         // Tentative de récuperation de l'élément
-        const idx = flowers.findIndex(f => f.id === id)
+        const idx = flowers.findIndex(f => f.id === id);
 
         // Envoi "null" si aucun élément trouvé
-        if(idx < 0) return null;
+        if (idx < 0) return null;
 
         // Envoi les données
         return flowers[idx];
