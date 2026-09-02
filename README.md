@@ -15,3 +15,4 @@
   - `/fleur/v1` : Chargement de page
   - `/fleur/v2` : Streaming de composant
   - `/fleur/v3` : Streaming de composant + Pagination (SearchParams)
+- `/contact` : Formulaire de contact avec Action server
