@@ -1,4 +1,5 @@
 'use server'; // ← Directive pour m'assurer que les actions sont du "coté" serveur
+import MessageService from '@/services/message.service';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
@@ -32,10 +33,12 @@ export async function handleContactSubmitAction(_state, formData) {
     }
 
     // Traitement des données
-
-    // TODO Faire des intéractions avec : WebAPI, DB, Service web,...
-    console.log('Traitement du fomulaire de contact !!!');
-    console.log(data);
+    // - Intéractions avec une WebAPI (Cela pourrait aussi etre : DB, Service web,...)
+    // ? Remarque: la méthode n'est pas "await", car on ne souhaite pas attendre avant la redirection
+    MessageService.send({
+        email: data.email,
+        content: data.msg
+    });
 
     // Cloture du traitement possible :
     // - Renvoi un state et actualise la page

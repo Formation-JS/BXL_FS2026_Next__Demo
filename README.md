@@ -16,3 +16,11 @@
   - `/fleur/v2` : Streaming de composant
   - `/fleur/v3` : Streaming de composant + Pagination (SearchParams)
 - `/contact` : Formulaire de contact avec Action server
+
+### Lien avec une WebAPI
+Pour la démo, l'api utiliser est [WebAPI](https://github.com/Formation-JS/BXL_FS2026_Next__Demo_WebAPI).  
+Celle-ci est basé sur json-server pour simuler une Web API.
+
+#### Contenu de l'API
+- **Users** → Login
+- **Messages** → Page Contact 
