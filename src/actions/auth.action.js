@@ -13,7 +13,6 @@ export async function authLoginAction(prevState, formData) {
             error: 'Le formulaire est invalide'
         };
     }
-    console.log(data);
 
     // Contacter la web api pour se connecter (→ JWT)
     const res = await fetch(`${process.env.URL_WEB_API}/login`, {
@@ -28,8 +27,6 @@ export async function authLoginAction(prevState, formData) {
     // Traitement de la requete
     // - En cas d'erreur
     if (!res.ok) {
-        console.log(await res.json());
-
         return {
             error: 'Les crédentials sont invalides'
         };
@@ -56,11 +53,51 @@ export async function authLoginAction(prevState, formData) {
     redirect('/');
 }
 
+
+export async function authRegisterAction(prevState, formData) {
+    // Pour la démo : pas de validation avec zod (no time :D)
+    const data = Object.fromEntries(formData);
+
+    // Traitement des erreurs du form
+    if (!data.email || !data.pwd) {
+        return {
+            error: 'Le formulaire est invalide'
+        };
+    }
+
+    if (data.pwd !== data.checkPwd) {
+        return {
+            error: 'La validation du mot de passe est incorrect'
+        };
+    }
+
+    // Contacter la web api pour se connecter (→ JWT)
+    const res = await fetch(`${process.env.URL_WEB_API}/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            email: data.email,
+            password: data.pwd
+        })
+    });
+
+    // Traitement de la requete
+    // - En cas d'erreur
+    if (!res.ok) {
+        return {
+            error: 'Erreur lors de la création du compte'
+        };
+    }
+
+    //? Redirection en fin de traitement
+    redirect('/login');
+}
+
 export async function authLogoutAction() {
     const cookieManager = await cookies();
     cookieManager.delete('session');
 
-    redirect('/')
+    redirect('/');
 }
 
 export async function authGetSession() {
