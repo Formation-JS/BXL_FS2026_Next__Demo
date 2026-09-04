@@ -1,3 +1,4 @@
+// Le dossier (auth) permet de grouper un ensemble de route pour permettre d'appliquer les mêmes fichier (layout, not-found, loading...). Celui-ci n'est pas reprit dans le routing !
 
 export default function AuthLayout({ children }) {
   return (
